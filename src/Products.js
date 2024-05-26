@@ -1,51 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, {useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Products = () => {
-  const [products, setProducts] = useState();
+const ProductComp = (product)=> {
   const history = useNavigate();
-
-  useEffect(() => {
-    fetch("http://localhost:3001/mido/products").then(async (r) => {
-      const { products } = await r.json();
-      console.log("first", products);
-      setProducts(products);
-    });
-  }, []);
-
   const handleBuy = (id) => {
     history(`/payment/${id}`);
   };
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h2>Buy Products Here</h2>
-      <div style={{ display: "flex", marginTop: "20px" }}>
-        <br />
-        {products?.map((product, i) => {
-          return (
-            <div style={{ padding: "50px" }}>
-              <div style={{ width: "100%" }}>
-                <h3>{product?.title}</h3>
-                <h3>{product?.description}</h3>
+ return  <div className="product">
+              <div>
+                <h3>{product.product.title}</h3>
+                <h3>{product.product.description}</h3>
                 <h3>
-                  <strong>${product?.price}</strong>
+                  <strong>${product.product.price}</strong>
                 </h3>
                 <br />
               </div>
-              <button onClick={() => handleBuy(product?.id)}>Buy now</button>
-            </div>
-          );
-        })}
+              <button className="buy-btn" onClick={() => handleBuy(product.product.id)}>Buy now</button>
+          </div>
+}
+
+const Products = () => {
+  const [products,setProducts]=useState([]);
+   useEffect(()=>{
+    async function fetchProducts(){
+      const res =await fetch("http://localhost:8000/products");
+      const data = await res.json();
+      if(data){
+        setProducts(data.products);
+        console.log("data:",data);
+        console.log("products:",products)
+      }
+    }
+    fetchProducts();
+   },[]);
+  
+
+  return (
+    <div>
+      <h2>Buy Products </h2>
+      <div className="products">
+        {products && products.map(product => <ProductComp key ={product.id} product={product} />) } 
       </div>
-    </div>
+   </div>
   );
 };
 

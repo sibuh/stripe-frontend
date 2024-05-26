@@ -17,7 +17,7 @@ function Payment() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/mido/cpi", {
+    fetch("http://localhost:8000/cpi", {
       method: "POST",
       body: JSON.stringify({
         id: parseInt(productId),
@@ -30,12 +30,12 @@ function Payment() {
 
 
   return (
-    <div style={{}}>
+    <div >
       <h1>React Stripe and the Payment Element</h1>
       {clientSecret && stripePromise && (
         <Elements
           stripe={stripePromise}
-          options={{ clientSecret, locale: "ja" }}
+          options={{ clientSecret, locale: "en" }}
         >
           <CheckoutForm />
         </Elements>
