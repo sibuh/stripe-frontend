@@ -5,6 +5,8 @@ import Completion from "./Completion";
 import Products from "./Products";
 import Home from "./Home";
 import Signup from "./SignUp";
+import Success from "./Success";
+import Error from './Error'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/success" element={<Success />}></Route>
+          <Route path="/err" element={<Error />}></Route>
           <Route path="/payment/:productId" element={<Payment />} />
           <Route path="/completion" element={<Completion />} />
         </Routes>

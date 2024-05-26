@@ -125,3 +125,10 @@ select {
   padding-top: 100px;
 
 }
+.error{
+  background-color: red;
+  height: 100px;
+  width: 300px;
+  color: white;
+  border-radius: 10px;
+}
