@@ -10,14 +10,14 @@ function Payment() {
   const { productId } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:8000/pk").then(async (r) => {
+    fetch("http://localhost:8080/pk").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8000/cpi", {
+    fetch("http://localhost:8080/cpi", {
       method: "POST",
       body: JSON.stringify({
         id: parseInt(productId),

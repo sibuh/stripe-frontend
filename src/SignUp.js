@@ -1,55 +1,117 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Login from './Login';
+import axios from "./api/axios";
+
+const RegisterUrl="/register";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({firstName: "",lastName:"",email: "",phone: ""});
+  const [data, setData] = useState(
+    {
+      first_name: "",
+      last_name:"",
+      email: "",
+      phone: "",
+      password:"",
+      username:""
+    });
+  const [errMsg,setErrMsg]=useState('');
+  const [success,setSuccess]=useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
-  
-  const navigate =useNavigate();
 
-  const handleSubmit = (event) => {
+  // const navigate =useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     
-       fetch("http://localhost:8080/v1/create",{
-            method:"POST",
-            headers:{"content-type":"application/json"},
-            body: JSON.stringify(formData)
-        })
-        .then(res => {
-            console.log("status code",res.status)
-            if (res.ok){
-                navigate("/success")
-            }
-          return  res.json
-        })
-        .then(data=>{})
-        .catch(error=>{
-            console.log(error)
-            navigate("/err")
-        })
-    
-  
-};
-
+     try{
+      const response=await axios.post(
+        RegisterUrl,
+        JSON.stringify(data),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
+         });
+        setSuccess(true);
+        console.log(response?.data)
+        setData({
+          first_name: "",
+          last_name:"",
+          email: "",
+          phone: "",
+          password:"",
+          username:""
+        });
+     }catch(err){
+      console.log(err?.response)
+      setErrMsg("error while registering")
+      console.log(err);
+     }
+   
+  }
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+      {success?<section>
+        <Login />
+      </section>:<section>
+      <p >{errMsg}</p>
+      <h1>Register</h1>
+      <form onSubmit={handleSubmit}>
       <label htmlFor="firstName">First Name:</label>
-      <input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={handleChange}/>
+      <input 
+        type="text" 
+        id="firstName" 
+        name="first_name"
+        value={data.first_name} 
+        onChange={handleChange}/>
 
       <label htmlFor="lastName">Last Name:</label>
-      <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange}/>
+      <input 
+        type="text" 
+        id="lastName" 
+        name="last_name" 
+        value={data.last_name} 
+        onChange={handleChange}/>
 
       <label htmlFor="phone">Phone:</label>
-      <input id="phone" name="phone" value={formData.phone} onChange={handleChange}/>
+      <input 
+        id="phone" 
+        name="phone" 
+        value={data.phone} 
+        onChange={handleChange}
+        />
 
       <label htmlFor="email">Email:</label>
-      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange}/>
-
-      <button type="submit">Submit</button>
-    </form>
-  );
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        value={data.email} 
+        onChange={handleChange}
+        />
+      <label htmlFor="username">Username:</label>
+      <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        value={data.username} 
+        onChange={handleChange} 
+        />
+      <label htmlFor="password">Password:</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        value={data.password} 
+        onChange={handleChange} 
+        />
+      <button >Submit</button>
+       </form>
+    </section>
+      }
+ </>
+  );  
 }

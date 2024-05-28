@@ -24,7 +24,7 @@ const Products = () => {
   const [products,setProducts]=useState([]);
    useEffect(()=>{
     async function fetchProducts(){
-      const res =await fetch("http://localhost:8000/products");
+      const res =await fetch("http://localhost:8080/events");
       const data = await res.json();
       if(data){
         setProducts(data.products);
