@@ -24,17 +24,18 @@ const Products = () => {
   const [products,setProducts]=useState([]);
    useEffect(()=>{
     async function fetchProducts(){
-      const res =await fetch("http://localhost:8080/events");
+      const res =await fetch("http://localhost:8080/v1/events");
       const data = await res.json();
       if(data){
-        setProducts(data.products);
+        setProducts(data);
         console.log("data:",data);
-        console.log("products:",products)
       }
     }
     fetchProducts();
    },[]);
-  
+
+   console.log("products:",products)
+
 
   return (
     <div>

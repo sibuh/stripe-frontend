@@ -5,19 +5,20 @@ import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 
 function Payment() {
-  const [stripePromise, setStripePromise] = useState(null);
+  const [stripePromise, setStripePromise] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const { productId } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:8080/pk").then(async (r) => {
+    fetch("http://localhost:8080/v1/pk").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
+      console.log("publishable key",publishableKey)
     });
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/cpi", {
+    fetch("http://localhost:8080/v1/cpi", {
       method: "POST",
       body: JSON.stringify({
         id: parseInt(productId),
@@ -25,6 +26,7 @@ function Payment() {
     }).then(async (result) => {
       var { clientSecret } = await result.json();
       setClientSecret(clientSecret);
+      console.log("client secret",clientSecret)
     });
   }, [productId]);
 
