@@ -132,3 +132,9 @@ select {
   color: white;
   border-radius: 10px;
 }
+.login{
+  text-decoration: none;
+}
+.sign-up{
+  text-decoration: none;
+}

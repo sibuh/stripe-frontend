@@ -1,12 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Home = () => {
-    const navigate=useNavigate();
-    function handleClick(){
-        navigate("/signup");
-
-    }
-
     return ( 
         <div className="home-page">
             <h1 className="home-page-title">Events you do not want to miss</h1>
@@ -17,7 +11,8 @@ const Home = () => {
                 <li>Graduation cermony</li>
                 <li>Others</li>
             </ul>
-            <button className="sign-up-btn" onClick={handleClick}>Sign up to see more</button>
+            <Link to="/signup" className="sign-up">Sign up</Link>
+            <Link to="/login" className="login"> Login</Link>
         </div>
      );
 }
