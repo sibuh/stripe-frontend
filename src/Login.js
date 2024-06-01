@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "./api/axios";
-import Products from "./Products";
+import Events from "./Events";
 const LoginUrl="/login";
 
 const Login = () => {
@@ -8,7 +8,6 @@ const Login = () => {
     const[loginData,setLoginData]=useState({username:"",password:""});
     const [success,setSuccess]=useState(false);
     const [errMsg,setErrMsg]=useState('');
-    // const navigate=useNavigate();
 
     function handleChange(event){
         event.preventDefault();
@@ -29,14 +28,13 @@ const Login = () => {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
             })
-            console.log(response);
+
         setSuccess(true);
-        console.log("success:",success);
+        const token = response.headers.get("Authorization");
+        localStorage.setItem('token', token);
         setLoginData({username:"",password:""});
        } catch(err){
         setErrMsg("request failed");
-        console.log(err?.response);
-
        }
         
 
@@ -46,7 +44,7 @@ const Login = () => {
     return ( 
         <>
         {success?<section>
-            <Products />
+            <Events />
             </section>:<section>
             {errMsg && <p>{errMsg} </p>}
             <form onSubmit={handleSubmit} >

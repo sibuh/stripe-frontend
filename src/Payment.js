@@ -3,37 +3,57 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
+import axios  from "./api/axios";
 
 function Payment() {
   const [stripePromise, setStripePromise] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const { productId } = useParams();
+  const { eventId } = useParams();
+  const[errMsg,setErrMsg]=useState('');
 
   useEffect(() => {
-    fetch("http://localhost:8080/v1/pk").then(async (r) => {
-      const { publishableKey } = await r.json();
-      setStripePromise(loadStripe(publishableKey));
-      console.log("publishable key",publishableKey)
-    });
+   const getPubKey= async ()=>{
+      try{
+        const res =await axios.get("http://localhost:8080/v1/pk",
+        {headers:{'Authorization':'Bearer '+localStorage.getItem('token')}});
+        const {publishableKey}=res.data
+        setStripePromise(loadStripe(publishableKey));
+      }catch(err){
+        setErrMsg('failed to get publishable key');
+        console.log('pubkey>>',err)
+      }
+    }
+   getPubKey();
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/v1/cpi", {
-      method: "POST",
-      body: JSON.stringify({
-        id: parseInt(productId),
-      }),
-    }).then(async (result) => {
-      var { clientSecret } = await result.json();
-      setClientSecret(clientSecret);
-      console.log("client secret",clientSecret)
-    });
-  }, [productId]);
+    const getClientSecret=async()=>{
+      try{
+        const res=await axios.get('http://localhost:8080/v1/cpi/'+eventId,
+        {
+          headers:{
+            'Authorization':'Bearer '+localStorage.getItem('token')
+          }
+        });
+        console.log("response data",res.data)
+        const {clientSecret}=res.data;
+        setClientSecret(clientSecret);
+      }catch(err){
+        setErrMsg('failed to get client secret');
+        console.log('secretkey>>',err)
+
+      }
+     
+    }
+    getClientSecret();
+
+  }, [eventId]);
 
 
   return (
     <div >
       <h1>React Stripe and the Payment Element</h1>
+      {errMsg&&<h1 className="error-msg">{errMsg}</h1>}
       {clientSecret && stripePromise && (
         <Elements
           stripe={stripePromise}
