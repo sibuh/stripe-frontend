@@ -98,7 +98,7 @@ select {
   border-radius: var(--radius);
   font-size: 0.7em;
 }
-.product{
+.event{
   background-color: #efefef;
   width: 250px;
   height:250px;
@@ -111,7 +111,7 @@ select {
 .buy-btn{
   margin: auto;
 }
-.products{
+.events{
   display: flex;
   flex-direction: row;
 }
@@ -137,4 +137,7 @@ select {
 }
 .sign-up{
   text-decoration: none;
+}
+.error-msg{
+  color: red;
 }

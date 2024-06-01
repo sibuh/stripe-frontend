@@ -4,7 +4,7 @@ import React from "react";
 const Error = () => {
     return ( 
         <div className="error">
-            <h2>The registration was not successful</h2>
+            <h2>Some thing went wrong</h2>
         </div>
      );
 }
