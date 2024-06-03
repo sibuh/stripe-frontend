@@ -8,7 +8,6 @@ export default function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,6 +18,8 @@ export default function CheckoutForm() {
     }
 
     setIsProcessing(true);
+    // const {id}= await stripe.retrievePaymentIntent(props.clientSecret)
+    // console.log("intent id:",id)
 
     const { error } = await stripe.confirmPayment({
       elements,
@@ -26,7 +27,6 @@ export default function CheckoutForm() {
         return_url: `${window.location.origin}/completion`,
       },
     });
-
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
     } else {

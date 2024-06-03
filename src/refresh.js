@@ -15,7 +15,8 @@ export const refresh = async()=>{
            console.log(token);
            localStorage.setItem('token',token);
         }else{
-        console.log("status:", response.status)        }
+            console.log("status:", response.status)    
+        }
 
     }catch(err){
         console.log("error:", err)  
