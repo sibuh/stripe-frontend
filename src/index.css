@@ -141,3 +141,6 @@ select {
 .error-msg{
   color: red;
 }
+.header{
+  display: inline-block;
+}
