@@ -134,9 +134,11 @@ select {
 }
 .login{
   text-decoration: none;
+  margin-right: 100px;
 }
 .sign-up{
   text-decoration: none;
+  margin-right: 50px;
 }
 .error-msg{
   color: red;
