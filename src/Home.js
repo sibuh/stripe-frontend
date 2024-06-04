@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from './images/logo';
+import logo from './logo.png'
 const Home = () => {
     return ( 
         <div className="home-page">
             <div className="header">
-                <img src={logo} /> <h1 className="home-page-title">Events you do not want to miss</h1>
+                <img className="logo-image" src={logo} alt="logo" /> <h1 className="home-page-title">Events you do not want to miss</h1>
             </div>
            
             <ul className="event-list">
