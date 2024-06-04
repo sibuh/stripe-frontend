@@ -141,3 +141,14 @@ select {
 .error-msg{
   color: red;
 }
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.logo-image{
+  border-radius: 10px;
+  height: 40px;
+  width: 100px;
+}

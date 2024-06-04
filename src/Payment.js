@@ -59,7 +59,7 @@ function Payment() {
           stripe={stripePromise}
           options={{ clientSecret, locale: "en" }}
         >
-          <CheckoutForm />
+          <CheckoutForm clientSecret={clientSecret}/>
         </Elements>
       )}
     </div>
