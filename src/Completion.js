@@ -33,12 +33,15 @@ function Completion() {
     return (
     <>
       {
-        success?<section><h1>Here is your ticket</h1></section>:
+        success?<section>
+          <h1>Congratulations!! Payment successful</h1>
+          <button onClick={handleSubmit}>Get ticket</button>
+          </section>:
         <section>
-        <h1>Congratulations!! Payment successful</h1>
+         <h1 className="error-msg">Failed to get ticket</h1>
         <Link to="/">Back to home</Link>
-        <h1 className="error-msg">Failed to get ticket</h1>
-        <button onClick={handleSubmit}>Get ticket</button>
+       
+        
         </section>
       }
      

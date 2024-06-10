@@ -1,10 +1,10 @@
 
 import React from "react";
 
-const Error = () => {
+const Error = (prop) => {
     return ( 
         <div className="error">
-            <h2>Some thing went wrong</h2>
+            <h2>{prop.errMsg}</h2>
         </div>
      );
 }
