@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "./api/axios";
+import Error from "./Error"
 
 const EventComponent = (ev)=> {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const EventComponent = (ev)=> {
 
  return  <div className="event">
               <div>
-                <h3>{ev.event.title}</h3>
+                <h1>{ev.event.title}</h1>
                 <h3>{ev.event.description}</h3>
                 <h3>
                   <strong>${ev.event.price}</strong>
@@ -47,7 +48,7 @@ const Events = () => {
     <div>
       <h2>Buy Ticket </h2>
       <div className="events">
-        {errMsg&&<h1 className="error-msg">Error while fetching events</h1>}
+        {errMsg&& <Error errMsg={errMsg} />}
         {events && events.map(event => <EventComponent key ={event.id} event={event} />) } 
       </div>
    </div>

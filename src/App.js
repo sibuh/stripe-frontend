@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Payment from "./Payment";
 import Completion from "./Completion";
-import Home from "./Home";
+import Landing from "./Landing";
 import Signup from "./SignUp";
 import Error from './Error'
 import Login from "./Login";
@@ -23,7 +23,7 @@ function App() {
     <main>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Landing/>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/err" element={<Error />}></Route>
