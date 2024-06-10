@@ -4,8 +4,11 @@ import logo from './logo.png'
 import Carousel from "./Carousel";
 
 const images = [
-
-  ];
+    "https://ibb.co/rQD4Q69",
+    "https://ibb.co/5sr7YKW",
+    "https://ibb.co/bBn29H6",
+    "https://ibb.co/sJkgYHQ"
+ ];
 const Landing = () => {
     return ( 
         <div className="landing-page">

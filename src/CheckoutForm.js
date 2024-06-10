@@ -12,14 +12,10 @@ export default function CheckoutForm() {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
 
     setIsProcessing(true);
-    // const {id}= await stripe.retrievePaymentIntent(props.clientSecret)
-    // console.log("intent id:",id)
 
     const { error } = await stripe.confirmPayment({
       elements,
