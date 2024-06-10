@@ -10,7 +10,7 @@ const EventComponent = (ev)=> {
 
  return  <div className="event">
               <div>
-                <h3>{ev.event.title}</h3>
+                <h1>{ev.event.title}</h1>
                 <h3>{ev.event.description}</h3>
                 <h3>
                   <strong>${ev.event.price}</strong>

@@ -52,7 +52,7 @@ function Payment() {
 
   return (
     <div >
-      <h1>React Stripe and the Payment Element</h1>
+      <h1>Fill Credentials To Pay </h1>
       {errMsg&&<h1 className="error-msg">{errMsg}</h1>}
       {clientSecret && stripePromise && (
         <Elements
