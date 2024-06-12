@@ -1,14 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from './logo.png'
-import Carousel from "./Carousel";
-
-const images = [
-    "https://ibb.co/rQD4Q69",
-    "https://ibb.co/5sr7YKW",
-    "https://ibb.co/bBn29H6",
-    "https://ibb.co/sJkgYHQ"
- ];
 const Landing = () => {
     return ( 
         <div className="landing-page">
@@ -21,14 +13,13 @@ const Landing = () => {
             </div>
            <div className="landing-page-main">
            <h1 className="landing-page-title">Events you do not want to miss</h1>
-                 <ul className="event-list">
-                    <li>Music Concert</li>
-                    <li>Fund Raising</li>
-                    <li>Church Programs</li>
-                    <li>Graduation cermony</li>
-                    <li>Others</li>
-                </ul>
-                <Carousel images={images} />
+                 <div className="event-list">
+                    <p>Music Concert</p>
+                    <p>Fund Raising</p>
+                    <p>Church Programs</p>
+                    <p>Graduation cermony</p>
+                    <p>Others</p>
+                </div>
            </div>
            
            
