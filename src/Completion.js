@@ -15,17 +15,12 @@ function Completion() {
           })
           if (res.status===200){
             setSuccess(true);
-            console.log(res.data)
-            console.log(success);
 
           }else{
             setErrMsg('failed to get ticket')
-            console.log(errMsg);
-
           }
         }catch(err){
           setErrMsg("failed to get ticket")
-          console.log(errMsg);
         }
       
 
