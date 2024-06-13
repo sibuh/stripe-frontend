@@ -36,7 +36,6 @@ export default function SignUp() {
           withCredentials: true,
          });
         setSuccess(true);
-        console.log(response?.data)
         setData({
           first_name: "",
           last_name:"",
@@ -46,9 +45,7 @@ export default function SignUp() {
           username:""
         });
      }catch(err){
-      console.log(err?.response)
       setErrMsg("error while registering")
-      console.log(err);
      }
    
   }
